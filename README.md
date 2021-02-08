@@ -4,7 +4,7 @@
 
 ### What is this repository for? ###
 
-This online Appendix is for the paper Mapping Controland Self-Adaptive System Properties (https://arxiv.org/xxxx).
+This online Appendix is for the paper Mapping Control and Self-Adaptive System Properties (https://arxiv.org/xxxx).
 
 
 
