@@ -1,0 +1,41 @@
+states per second: 4377.62
+state count: 23197
+mips: 2.53023
+
+version: 4.4.2+493f57f71694
+architecture: Intel(R) Core(TM) i7-8665U CPU @ 1.90GHz
+memory used: 895684
+physical memory used: 380928
+user time: 7.248778
+system time: 0.132014
+wall time: 7.280177
+
+cycle timers (search):
+  smt-f: { mcycles: 0, hits: 0, kc-avg: 0 }
+  smt-eq: { mcycles: 0, hits: 0, kc-avg: 0 }
+  divm: { mcycles: 7836, hits: 30905, kc-avg: 253 }
+  hash: { mcycles: 2137, hits: 30904, kc-avg: 69 }
+input file: ../my_mpcACCsystem.bc
+compile options:
+  - ../my_mpcACCsystem.bc
+input options:
+  sys.0: "nofail:malloc"
+  divine.bcname: "../my_mpcACCsystem.bc"
+dios config: fair
+lamp config: ""
+static reduction: 1
+property type: liveness
+
+timers:
+  lart: 0.614
+  loader: 0.976
+  boot: 0.032
+  search: 5.3
+  ce: 0.057
+cycle timers (ce):
+  smt-f: { mcycles: 0, hits: 0, kc-avg: 0 }
+  smt-eq: { mcycles: 0, hits: 0, kc-avg: 0 }
+  divm: { mcycles: 0, hits: 0, kc-avg: 0 }
+  hash: { mcycles: 0, hits: 0, kc-avg: 0 }
+
+error found: no
