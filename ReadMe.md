@@ -1,5 +1,7 @@
 # Artifacts for Mapping Control Theory and Software Engineering Properties
 
+Status: [![DOI](https://zenodo.org/badge/332769336.svg)](https://zenodo.org/badge/latestdoi/332769336)
+
 [Repo Content](#contents) | [Replicate Experiments](#repl-exp) | [From Simulink to Model Checking CPP](#sim-cpp) | [Contact Us](#contact)
 
 This repository is an online Appendix for versioning the artifacts produced in the ongoing research effort for mapping control theory and software engineering properties.
