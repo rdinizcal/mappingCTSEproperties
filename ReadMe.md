@@ -1,6 +1,6 @@
 # Artifacts for Mapping Control Theory and Software Engineering Properties
 
-Status: [![DOI](https://zenodo.org/badge/332769336.svg)](https://zenodo.org/badge/latestdoi/332769336)
+[![DOI](https://zenodo.org/badge/332769336.svg)](https://zenodo.org/badge/latestdoi/332769336)
 
 [Repo Content](#contents) | [Replicate Experiments](#repl-exp) | [From Simulink to Model Checking CPP](#sim-cpp) | [Contact Us](#contact)
 
