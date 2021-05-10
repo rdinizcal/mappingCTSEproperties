@@ -19,10 +19,11 @@
 
 PRODUCT_NAME              = my_mpcACCsystem
 MAKEFILE                  = my_mpcACCsystem.mk
-MATLAB_ROOT               = /usr/local/MATLAB/R2021a
+START_DIR                 = "/absolute-path/to/repo"
+MATLAB_ROOT               = $(START_DIR)/MATLAB/R2021a
+#MATLAB_ROOT               = /usr/local/MATLAB/R2021a
 MATLAB_BIN                = /usr/local/MATLAB/R2021a/bin
 MATLAB_ARCH_BIN           = $(MATLAB_BIN)/glnxa64
-START_DIR                 = "write here the abs path to the artifact folder"
 SOLVER                    = 
 SOLVER_OBJ                = 
 CLASSIC_INTERFACE         = 0
@@ -31,7 +32,7 @@ MODEL_HAS_DYNAMICALLY_LOADED_SFCNS = 0
 RELATIVE_PATH_TO_ANCHOR   = ..
 C_STANDARD_OPTS           = -fwrapv
 CPP_STANDARD_OPTS         = -fwrapv
-DIVINE_PATH				  = "write here your divine installation path"
+DIVINE_PATH				  = "/absolute-path/to/divine"
 DIVINE_LIBS_PATH		  = $(DIVINE_PATH)/_build.release/divine
 DIVINE_EXC 			  	  = $(DIVINE_PATH)/_build.release/tools/divine
 
@@ -253,7 +254,7 @@ DCPPFLAGS += $(DCPPFLAGS_BASIC)
 ## PHONY TARGETS
 ###########################################################################
 
-.PHONY : all build buildobj clean info prebuild download execute divine-build
+.PHONY : all build buildobj clean info prebuild download execute divine-build divine-check
 
 all : build
 	@echo "### Successfully generated all binary outputs."
@@ -276,7 +277,7 @@ execute : download
 divine-build: 
 	$(DCC) $(DCPPFLAGS) $(MAIN_DIV_SRC) $(SRCS) -lm -o $(PRODUCT-DIV)
 
-check:
+divine-check:
 	$(DIVINE_EXC) check --liveness --counterexample --report-unique  $(PRODUCT-DIV)
 
 ###########################################################################
@@ -421,6 +422,7 @@ clean :
 	$(RM) $(ALL_OBJS)
 	$(RM) $(ALL_BCS) 
 	$(RM) *.report
+	$(RM) *.report.*
 	$(ECHO) "### Deleted all derived files."
 
 

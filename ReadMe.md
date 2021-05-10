@@ -15,7 +15,6 @@ This repository is an online Appendix for versioning the artifacts produced in t
 
 ### Pre-Requisites
 
-- MATLAB (R2021a)
 - [DIVINE 4](https://divine.fi.muni.cz/) (version 4.4.2+493f57f71694)
 
 ### Configuration
@@ -25,9 +24,13 @@ You must configure the makefile (my_mpcACCsystem.mk) to correctly run the experi
 - START_DIR: line 27
 - DIVINE_PATH: line 34
 
-### Scenarios
+<h3 id="scenarios">Scenarios</h3>
 
-![](img/scenarios.png?raw=true)
+| ID             | v0 ego     | v0 lead    | x0 ego     | v0 lead    | Description|
+| :------------- | :--------: | :--------: | :--------: | :--------: | :--------: |
+| Case 1         | 10km/h     | 30km/h     | 10m        | 50m        | Ego is always at safe distance.|
+| Case 2         | 20km/h     | 25km/h     | 3m         | 5m         | Ego recovers from unsafe distance.|
+| Case 3         | 40km/h     | 15km/h     | 10m        | 20m        | Ego cannot recover from unsafe distance.|
 
 The values for v_0 and x_0 can be changed in the file my_mpcACCsystem_grt_rtw/my_mpcACCsystem_data.cpp.
 
@@ -46,7 +49,7 @@ make -f my_mpcACCsystem.mk divine-build
 If everything goes well, you should expect a new file my_mpcACCsystem.bc. Then, you can proceed and execute divine check.
 
 ```
-make -f my_mpcACCsystem.mk check
+make -f my_mpcACCsystem.mk divine-check
 ```
 
 As a result, the check will generate a report, named after my_mpcACCsystem.report.(unique label).
@@ -57,14 +60,14 @@ As a result, the check will generate a report, named after my_mpcACCsystem.repor
 
 - MATLAB (R2021a) with License.
 - Simulink + Simulink Coder.
-- Access to [Spot](https://spot.lrde.epita.fr/app/) 
-- [DIVINE 4](https://divine.fi.muni.cz/) (version 4.4.2+493f57f71694)
+- Access to [Spot](https://spot.lrde.epita.fr/app/).
+- [DIVINE 4](https://divine.fi.muni.cz/) (version 4.4.2+493f57f71694).
 
 ### ACC Simulink Model
 
 1) Open the folder ./myACC in your Matlab and open the file my_acc_example.m.
    
-2) Configure (initial values x0, v0, amin, etc) and run the file. This should open the Simulink view and plot graphs with the vehicles behavior.
+2) Configure (initial values x0, v0, amin, etc) and run the file. This, should open the Simulink view and plot graphs with the vehicles' behavior.
    
 ### Generating CPP code
 
@@ -72,7 +75,10 @@ For this step, we followed the [simulink tutorial for C code generation](https:/
 
 3) Make sure to select C++ as the language and tick the Generate code only configurations.
 
-![](img/code_config.png?raw=true)
+- Solver: Type = Fixed-Step
+- Hardware Implementation: Change it according to the Operating System (Device type).
+- Code Generation: Language = C++; Generate Code Only = True;
+- Interface: Nonreusable function.
 
 4) Open the Simulink Code view and click Generate Code.
 
@@ -87,8 +93,12 @@ For this step, we followed the [simulink tutorial for C code generation](https:/
 7) Create the atomic propostions to be checked (see [my_mpcACCsystem.cpp](/my_mpcACCsystem_grt_rtw/my_mpcACCsystem.cpp) lines 195, 853 and [my_mpcACCsystem.h](/my_mpcACCsystem_grt_rtw/my_mpcACCsystem.h) line 42).
       
 8) Open [Spot](https://spot.lrde.epita.fr/app/), type the LTL property to be checked and implement the generated Büchi Automata (see next function in [main.cpp](/my_mpcACCsystem_grt_rtw/main.cpp)).   
+   
+9) Follow along the [scenario execution step](#scenarios).
 
-<h2 id="contents">Contact</h2>
+<h2 id="contact">Contact</h2>
+
+Feel free to submit issues.
 
 For questions, discussions, or suggestions don't hesitate, contact me!
 
