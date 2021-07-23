@@ -98,21 +98,18 @@ Given a desired property &phi; and a model _M_, model checking decides whether _
     ```cpp
     switch (current_state) {
         case 0:
-            __vm_ctl_flag( 0, _VM_CF_Accepting );
             if (!AP[safe]) {return 0;}
-            if (AP[safe])  {return __vm_choose( 2 )?0:1}
+            if (AP[safe])  {return __vm_choose( 2 ) ? 0 : 1}
         case 1:
+            __vm_ctl_flag( 0, _VM_CF_Accepting );
             if (AP[safe]) {return 1;}
             if (!AP[safe]) {return 2;}
         case 2:
-            __vm_ctl_flag( 0, _VM_CF_Accepting );
             return 2;   
     }
     ```
     
-    <sup><sub>*We use macros from DIVINE to support the coding. The ```__vm_ctl_flag``` to mark an accepting state. The ```__vm_choose``` to emulate non-determinism</sub></sup>
-    
-    <sup><sub>**Accepting states are inverted from the suggestion in spot tool since checking for liveness preempts the checking when the flag is raised infinetly many times.</sub></sup>
+    <sup><sub>*We use macros from DIVINE to support the coding. The ```__vm_ctl_flag``` to mark an accepting states or transitions. We use the ```__vm_choose``` to emulate non-determinism</sub></sup>
 
 6) The model (_M_) is the generated Simulink code. Since the model constraints will serve as guards to the transitions in the implemented automata (e.g., ```AP[safe]``` conditions in our previous snippet) we need to make such guards explicit in the model. To expose ```safe``` we have implemented it as an atomic proposition (AP) in two files:
    
@@ -125,7 +122,7 @@ Given a desired property &phi; and a model _M_, model checking decides whether _
     6.2) Implement them here: [my_mpcACCsystem.cpp](/my_mpcACCsystem_grt_rtw/my_mpcACCsystem.cpp) lines 195, 853.
 
     ```cpp
-    AP[safe] = (my_mpcACCsystem_B.d_rel - my_mpcACCsystem_B.safe_distance) < 0.05;
+    AP[safe] = (my_mpcACCsystem_B.d_rel - my_mpcACCsystem_B.safe_distance) > 0.05 * my_mpcACCsystem_B.safe_distance;
     ```
 
 7) Finally, property and model need to be integrated before we compile and check the code with DIVINE. In our case, this is done in [main.cpp](/my_mpcACCsystem_grt_rtw/main.cpp) in two steps.
