@@ -378,7 +378,7 @@ static int_T rt_TermModel(MODEL_CLASSNAME & mdl)
  * 
  * Abstract:
  *   Sync the büchi automata (property) with the system
- *   Property: [](!safe -> <>([]safe))
+ *   Property: <>([]safe)
  *   Type: Liveness (execute with --liveness)  
  */
 int next( int state, std::map<APs, bool> AP ) {
@@ -395,9 +395,8 @@ int next( int state, std::map<APs, bool> AP ) {
         fi;
          */
         case 0:
-            __vm_ctl_flag( 0, _VM_CF_Accepting );
-            if (!AP[safe]) {; return 0;}
-            if (AP[safe]) return __vm_choose( 2 ) ? 0 : 1;
+            if (!AP[safe]) {return 0;}
+            if (AP[safe]) {return __vm_choose( 2 ) ? 0 : 1;}
         /*
         accept_S1:
         if
@@ -406,6 +405,7 @@ int next( int state, std::map<APs, bool> AP ) {
         fi;
         */
         case 1:
+            __vm_ctl_flag( 0, _VM_CF_Accepting);
             if (AP[safe]) {return 1;}
             if (!AP[safe]) {return 2;}
         /*
@@ -415,7 +415,6 @@ int next( int state, std::map<APs, bool> AP ) {
         fi;
         */
         case 2:
-            __vm_ctl_flag( 0, _VM_CF_Accepting );
             return 2;
         default:
             return state;

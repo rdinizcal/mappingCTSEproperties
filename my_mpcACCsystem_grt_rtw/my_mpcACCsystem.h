@@ -39,7 +39,7 @@
 #include "rtGetInf.h"
 
 /* Atomic Propositions for Model Checking*/
-enum APs {safe, new_stimulus};
+enum APs {safe};
 
 /* Macros for accessing real-time model data structure */
 #ifndef rtmGetContStateDisabled

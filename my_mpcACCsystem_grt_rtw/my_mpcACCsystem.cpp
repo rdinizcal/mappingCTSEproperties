@@ -192,7 +192,7 @@ void my_mpcACCsystemModelClass::step()
     my_mpcACCsystem_B.e_d = my_mpcACCsystem_B.safe_distance -
       my_mpcACCsystem_B.d_rel;
 
-    AP[safe] = (my_mpcACCsystem_B.e_d <= 0);
+    AP[safe] = (my_mpcACCsystem_B.d_rel - my_mpcACCsystem_B.safe_distance) > 0.05 * my_mpcACCsystem_B.safe_distance;
 
     if (rtmIsMajorTimeStep((&my_mpcACCsystem_M))) {
       /* Chart: '<S1>/Chart' */
