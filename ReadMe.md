@@ -98,14 +98,14 @@ Given a desired property &phi; and a model _M_, model checking decides whether _
     ```cpp
     switch (current_state) {
         case 0:
-            if (!AP[safe]) {return 0;}
-            if (AP[safe])  {return __vm_choose( 2 ) ? 0 : 1}
+            if (!AP[safe]) {goto 0;}
+            if (AP[safe])  {goto __vm_choose( 2 ) ? 0 : 1}
         case 1:
             __vm_ctl_flag( 0, _VM_CF_Accepting );
-            if (AP[safe]) {return 1;}
-            if (!AP[safe]) {return 2;}
+            if (AP[safe]) {goto 1;}
+            if (!AP[safe]) {goto 2;}
         case 2:
-            return 2;   
+            goto 2;   
     }
     ```
     
